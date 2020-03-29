@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+#数据库配置
+  datasource:
+    #引入druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.114.171.62:3306/online_examdb?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: password
+
+#SpringBoot整合mybatis-plus 使用时切记模式不同
+mybatis-plus:
+  #定义别名包 当程序自动映射时自动拼接
+  #type-aliases-package: org.triber.dwbi.model
+  #必须编辑映射文件 在映射文件中编辑sql
+  mapper-locations: classpath:/mybatis/*.xml
+  #开启驼峰映射
+  configuration:
+    map-underscore-to-camel-case: true
+
+#日志配置文件
+logging:
+  config: classpath:config/logback-spring.xml
+  level:
+    root: info
+    com:
+      exam: debug
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: debug
+      apache:
+        coyote:
+          http11:
+            Http11InputBuffer: info

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exam.mapper.ChapterMapper">
+    <!--查询章节列表-->
+    <select id="getChapterList" resultType="com.exam.model.Chapter">
+        SELECT * FROM tb_chapter
+    </select>
+
+    <!--添加章节-->
+    <insert id="addCharpterMsg" parameterType="com.exam.model.Chapter">
+        INSERT INTO tb_chapter(id,chapter_name,subject_code) VALUES (null ,#{chapter_name},#{subject_code})
+    </insert>
+
+    <!--编辑更新-->
+    <update id="updateChapter" parameterType="com.exam.model.Chapter">
+        update tb_chapter
+        <set>
+            <if test="chapter_name!=null and chapter_name!=''">
+                chapter_name=#{chapter_name},
+            </if>
+        </set>
+        where chapter_code=#{chapter_code}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteChapter" >
+      delete from tb_chapter where chapter_code=#{chapter_code}
+    </delete>
+
+</mapper>
